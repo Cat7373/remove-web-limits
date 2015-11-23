@@ -11,7 +11,7 @@
 // @supportURL     https://github.com/Cat7373/remove-web-limits/issues/
 // @installURL     https://github.com/Cat7373/remove-web-limits/raw/master/Remove_web_limits.user.js
 // @author         Cat73
-// @version        1.1
+// @version        1.1.1
 // @license        LGPLv3
 // @compatible     chrome 完美支持
 // @compatible     firefox 未测试
@@ -32,7 +32,16 @@
         return true;
       };
     }
-    return this._addEventListener(event, func, useCapture);
+    return this[addEventListenerName](event, func, useCapture);
+  }
+
+  // 获取随机字符串
+  function getRandStr(chs, len) {
+    var str = '';
+    for(var i = 0; i < len; i++) {
+      str += chs[parseInt(Math.random() * chs.length)];
+    }
+      return str;
   }
 
   // 获取所有元素 包括document
@@ -73,8 +82,9 @@
   }
 
   // 将 addEventListener 重定义位置
-  HTMLElement.prototype._addEventListener = HTMLElement.prototype.addEventListener;
-  document._addEventListener = document.addEventListener;
+  var addEventListenerName = getRandStr('qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM', parseInt(Math.random() * 12 + 8));
+  HTMLElement.prototype[addEventListenerName] = HTMLElement.prototype.addEventListener;
+  document[addEventListenerName] = document.addEventListener;
 
   // 调用清理函数
   setInterval(clear, 5000);
