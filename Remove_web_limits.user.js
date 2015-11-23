@@ -1,4 +1,5 @@
 // ==UserScript==
+// @id             99feda91-dcd8-4626-8555-d29c389a997f
 // @namespace      https://www.github.com/Cat7373/
 // @name           网页限制解除
 // @name:en        Remove web limits
@@ -6,13 +7,16 @@
 // @description    解除一些网站的禁止 选择、复制、右键 等限制
 // @description:en Deregulating some sites prohibit select, copy, right of
 // @description:zh 解除一些网站的禁止 选择、复制、右键 等限制
+// @homepageURL    https://github.com/Cat7373/remove-web-limits
+// @supportURL     https://github.com/Cat7373/remove-web-limits/issues/
+// @installURL     https://github.com/Cat7373/remove-web-limits/raw/master/Remove_web_limits.user.js
+// @author         Cat73
+// @version        1.0
+// @license        LGPLv3
+// @compatible     firefox, chrome, opera, safari
 // @include        http://*
 // @include        https://*
 // @match          *://*/*
-// @homepageURL    https://github.com/Cat7373/remove-web-limits
-// @supportURL     https://github.com/Cat7373/remove-web-limits/issues/
-// @author         Cat73
-// @version        1.0
 // @grant          unsafeWindow
 // @run-at         document-start
 // ==/UserScript==
