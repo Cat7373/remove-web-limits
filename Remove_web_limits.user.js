@@ -13,7 +13,10 @@
 // @author         Cat73
 // @version        1.1
 // @license        LGPLv3
-// @compatible     chrome, firefox, opera, safari
+// @compatible     chrome 完美支持
+// @compatible     firefox 未测试
+// @compatible     opera 未测试
+// @compatible     safari 未测试
 // @include        http://*
 // @include        https://*
 // @match          *://*/*
