@@ -11,9 +11,9 @@
 // @supportURL     https://github.com/Cat7373/remove-web-limits/issues/
 // @installURL     https://github.com/Cat7373/remove-web-limits/raw/master/Remove_web_limits.user.js
 // @author         Cat73
-// @version        1.0
+// @version        1.1
 // @license        LGPLv3
-// @compatible     firefox, chrome, opera, safari
+// @compatible     chrome, firefox, opera, safari
 // @include        http://*
 // @include        https://*
 // @match          *://*/*
@@ -42,10 +42,6 @@
     elements2[elements2.length] = document;
     return elements2;
   }
-  
-  // 将 addEventListener 重定义位置
-  HTMLElement.prototype._addEventListener = HTMLElement.prototype.addEventListener;
-  document._addEventListener = document.addEventListener;
 
   // 清理限制函数
   function clear() {
@@ -64,8 +60,23 @@
     }
   }
 
-  // 初始化
+  // 添加css
+  function addStyle(css) {
+    var head = document.getElementsByTagName('head')[0];
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = css;
+    head.appendChild(style);
+  }
+
+  // 将 addEventListener 重定义位置
+  HTMLElement.prototype._addEventListener = HTMLElement.prototype.addEventListener;
+  document._addEventListener = document.addEventListener;
+
+  // 调用清理函数
   setInterval(clear, 5000);
   window.addEventListener('load', clear, true);
   clear();
+
+  addStyle("html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}");
 }("contextmenu|select|selectstart|copy|cut|dragstart".split("|"));
