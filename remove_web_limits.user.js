@@ -9,7 +9,7 @@
 // @description:zh 解除一些网站的禁止 选择、复制、右键 等限制
 // @homepageURL    https://github.com/Cat7373/remove-web-limits
 // @supportURL     https://github.com/Cat7373/remove-web-limits/issues/
-// @installURL     https://github.com/Cat7373/remove-web-limits/raw/master/Remove_web_limits.user.js
+// @installURL     https://cat7373.github.io/remove-web-limits/remove_web_limits.user.js
 // @author         Cat73
 // @version        1.1.1
 // @license        LGPLv3
