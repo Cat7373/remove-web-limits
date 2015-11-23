@@ -7,7 +7,7 @@
 // @description    解除一些网站的禁止 选择、复制、右键 等限制
 // @description:en Deregulating some sites prohibit select, copy, right of
 // @description:zh 解除一些网站的禁止 选择、复制、右键 等限制
-// @homepageURL    https://github.com/Cat7373/remove-web-limits
+// @homepageURL    https://cat7373.github.io/remove-web-limits/
 // @supportURL     https://github.com/Cat7373/remove-web-limits/issues/
 // @installURL     https://cat7373.github.io/remove-web-limits/remove_web_limits.user.js
 // @author         Cat73
