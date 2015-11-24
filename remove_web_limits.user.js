@@ -30,6 +30,7 @@
 // @run-at         document-start
 // ==/UserScript==
 
+
 // 要处理的event
 var eventNames = "contextmenu|select|selectstart|copy|cut|dragstart|mousedown".split("|");
 // 原始 addEventListener 的保存位置
@@ -40,6 +41,7 @@ function addEventListener(event, func, useCapture) {
   if(eventNames.indexOf(event) >= 0) {
     func = returnTrue;
   }
+
   this[addEventListenerName](event, func, useCapture);
 }
 
@@ -47,10 +49,10 @@ function addEventListener(event, func, useCapture) {
 function clearLoop() {
   var elements = getElements();
 
-  for(var i = 0; i < elements.length; i++) {
+  for(var i in elements) {
     var element = elements[i];
 
-    for(var j = 0; j < eventNames.length; j++) {
+    for(var j in eventNames) {
       element['on' + eventNames[j]] = null;
     }
   }
@@ -64,20 +66,24 @@ function returnTrue() {
 // 获取随机字符串
 function getRandStr(chs, len) {
   var str = '';
+
   for(var i = 0; i < len; i++) {
     str += chs[parseInt(Math.random() * chs.length)];
   }
-    return str;
+
+  return str;
 }
 
 // 获取所有元素 包括document
 function getElements() {
   var elements = document.getElementsByTagName('*');
+
   var elements2 = [];
   for(var i = 0; i < elements.length; i++) {
-    elements2[i] = elements[i];
+    elements2.push(elements[i]);
   }
-  elements2[elements2.length] = document;
+  elements2.push(document);
+
   return elements2;
 }
 
@@ -96,10 +102,10 @@ function init() {
   clearLoop();
 
   // 添加CSS
-  GM_addStyle("html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}");
-  
+  GM_addStyle('html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}');
+
   // 输出原始 addEventListener 位置
-  GM_log("原始 addEventListener 名称：" + addEventListenerName);
+  GM_log('原始 addEventListener 名称：' + addEventListenerName);
 }
 
 init();
