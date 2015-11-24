@@ -14,4 +14,4 @@ https://cat7373.github.io/remove-web-limits/
     https://addons.opera.com/zh-cn/extensions/details/tampermonkey-beta/
   * Safari 浏览器需要安装 TamperMonkey 扩展 来运行用户脚本。  
     http://tampermonkey.net/index.php?ext=dhdg&browser=safari
-2. 打开 https://github.com/Cat7373/remove-web-limits/raw/master/Remove_web_limits.user.js 来安装脚本.
+2. 打开 https://cat7373.github.io/remove-web-limits/remove_web_limits.user.js 来安装脚本.
