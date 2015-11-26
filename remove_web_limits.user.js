@@ -14,19 +14,18 @@
 // @updateURL      https://cat7373.github.io/remove-web-limits/remove_web_limits.user.js
 
 // @author         Cat73
-// @version        1.1.2
+// @version        1.1.3
 // @license        LGPLv3
 
 // @compatible     chrome 完美支持
-// @compatible     firefox 未测试
-// @compatible     opera 未测试
+// @compatible     firefox 完美支持
+// @compatible     opera 完美支持
 // @compatible     safari 未测试
 
 // @include        http://*
 // @include        https://*
 // @match          *://*/*
-// @grant          GM_addStyle
-// @grant          GM_log
+// @grant          none
 // @run-at         document-start
 // ==/UserScript==
 
@@ -87,6 +86,15 @@ function getElements() {
   return elements2;
 }
 
+// 添加css
+function addStyle(css) {
+  var head = document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+  style.innerHTML = css;
+  head.appendChild(style);   
+}
+
 // 初始化
 function init() {
   // hook addEventListener
@@ -102,10 +110,10 @@ function init() {
   clearLoop();
 
   // 添加CSS
-  GM_addStyle('html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}');
+  addStyle('html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}');
 
   // 输出原始 addEventListener 位置
-  GM_log('原始 addEventListener 名称：' + addEventListenerName);
+  console.debug('原始 addEventListener 名称：' + addEventListenerName);
 }
 
 init();
