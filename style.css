@@ -1,156 +1,157 @@
 html, body {
-    line-height: 24px;
-    margin: 0;
-    padding: 0;
+  line-height: 24px;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background: #eef2f5;
-    padding-bottom: 40px;
+  background: #eef2f5;
+  padding-bottom: 40px;
 }
 
 #main-body {
-    width: 960px;
-    margin: 0 auto;
+  width: 960px;
+  margin: 0 auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    padding: 0;
-    font-size: 100%;
-    font-weight: normal;
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font-weight: normal;
 }
 
 a, a:hover, a:active, a:visited {
-    text-decoration: none;
-    color: #026b76;
-    outline: none;
+  text-decoration: none;
+  color: #026b76;
+  outline: none;
 }
 
 a img {
-    border: none;
+  border: none;
 }
 
 #background {
-    width: 100%;
-    height: 400px;
-    margin-bottom: -400px;
-    background: #037ad8;
+  width: 100%;
+  height: 400px;
+  margin-bottom: -400px;
+  background: #037ad8;
 }
 
 header, h3 {
-    font-family: "Microsoft YaHei", Helvetica,Arial, sans-serif;
-    font-size: 16px;
-    font-weight: normal;
-    display: block;
+  font-family: "Microsoft YaHei", Helvetica,Arial, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  display: block;
 }
 
 header {
-    height: 400px;
-    width: 100%;
+  height: 400px;
+  width: 100%;
 }
 
 header ::selection {
-    background: white;
-    color: #037ad8;
+  background: white;
+  color: #037ad8;
 }
 
 h1 {
-    color: #ffffff;
-    font-size: 48px;
-    line-height: 60px;
-    margin: 0;
-    padding: 120px 100px 0;
-    font-weight: bold;
+  color: #ffffff;
+  font-size: 48px;
+  line-height: 60px;
+  margin: 0;
+  padding: 120px 100px 0;
+  font-weight: bold;
 }
 
 h2 {
-    line-height: 30px;
-    font-size: 24px;
-    margin: 40px 0 0 100px;
-    font-weight: bold;
-    color: #ffffff;
-    font-weight: normal;
+  line-height: 30px;
+  font-size: 24px;
+  margin: 40px 0 0 100px;
+  font-weight: bold;
+  color: #ffffff;
+  font-weight: normal;
 }
 
 #install {
-    background: #80c3f7;
-    border: 1px solid #1d80cf;
-    border-radius: 5px;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 1px rgba(50, 50, 50, 0.05);
-    color: #fff;
-    cursor: pointer;
-    display: block;
-    font-size: 28px;
-    line-height: 58px;
-    outline: 0 none;
-    padding: 0 15px;
-    text-align: center;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    width: 300px;
-    margin: -130px 100px 0;
-    float: right;
+  background: #80c3f7;
+  border: 1px solid #1d80cf;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 1px rgba(50, 50, 50, 0.05);
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  font-size: 28px;
+  line-height: 58px;
+  outline: 0 none;
+  padding: 0 15px;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  margin: -130px 100px 0;
+  float: right;
 }
 
 #install:active {
-    border: 1px solid #0971c5;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.1);
-    color: #eee;
+  border: 1px solid #0971c5;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.1);
+  color: #eee;
 }
 
 #report {
-    float: right;
-    width: 400px;
-    height: 70px;
-    padding: 0;
-    display: block;
-    font-size: 16px;
-    text-align: right;
-    margin: 0 100px;
+  float: right;
+  width: 400px;
+  height: 70px;
+  padding: 0;
+  display: block;
+  font-size: 16px;
+  text-align: right;
+  margin: 0 100px;
+  color: #ffffff;
 }
 
 #report a {
-    color: #fff;
+  color: #fff;
 }
 
 h3 {
-    font-size: 24px;
-    font-weight: bold;
-    border-bottom: 2px #ccc solid;
-    padding: 10px 20px 10px 10px;
-    margin: 20px 0 10px;
-    color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 2px #ccc solid;
+  padding: 10px 20px 10px 10px;
+  margin: 20px 0 10px;
+  color: #333;
 }
 
 #browsers {
-    font-size: 18px;
-    line-height: 150%;float: right;
-    clear: right;
-    width: 54%;
-    padding: 40px 0;
+  font-size: 18px;
+  line-height: 150%;float: right;
+  clear: right;
+  width: 54%;
+  padding: 40px 0;
 }
 
 #browsers {
-    padding: 0;
-    width: 100%;
+  padding: 0;
+  width: 100%;
 }
 
 .browser > div > a, .browser > div > span > a {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .browser {
-    margin: 10px 20px 30px 0;
-    padding: 0 0 0 96px;
+  margin: 10px 20px 30px 0;
+  padding: 0 0 0 96px;
 }
 
 .browser .browser-icon {
-    display: block;
-    width: 64px;
-    height: 64px;
-    margin: 0 0 -64px -80px;
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 0 0 -64px -80px;
 }
 
 .needfill, .notfill {
-    display: none;
+  display: none;
 }
