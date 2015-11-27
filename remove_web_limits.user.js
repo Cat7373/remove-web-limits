@@ -17,9 +17,9 @@
 // @version        1.1.3
 // @license        LGPLv3
 
-// @compatible     chrome 46.0.2490.86 测试通过
-// @compatible     firefox 42.0 测试通过
-// @compatible     opera 33.0.1990.115 测试通过
+// @compatible     chrome 46.0.2490.86 + TamperMonkey 测试通过
+// @compatible     firefox 42.0 + GreaseMonkey 测试通过
+// @compatible     opera 33.0.1990.115 + TamperMonkey 测试通过
 // @compatible     safari 未测试
 
 // @match          *://*/*
