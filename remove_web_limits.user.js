@@ -5,9 +5,9 @@
 // @name:en        Remove web limits
 // @name:zh        网页限制解除
 
-// @description    解除一些网站的禁止 选择、复制、右键 等限制
-// @description:en Deregulating some sites prohibit select, copy, right of
-// @description:zh 解除一些网站的禁止 选择、复制、右键 等限制
+// @description    通杀大部分网站，可以解除禁止复制、剪切、选择文本、右键菜单的限制。
+// @description:en Pass to kill most of the site, you can lift the restrictions prohibited to copy, cut, select the text, right-click menu.
+// @description:zh 通杀大部分网站，可以解除禁止复制、剪切、选择文本、右键菜单的限制。
 
 // @homepageURL    https://cat7373.github.io/remove-web-limits/
 // @supportURL     https://github.com/Cat7373/remove-web-limits/issues/
@@ -22,8 +22,6 @@
 // @compatible     opera 33.0.1990.115 测试通过
 // @compatible     safari 未测试
 
-// @include        http://*
-// @include        https://*
 // @match          *://*/*
 // @grant          none
 // @run-at         document-start
