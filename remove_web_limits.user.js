@@ -17,9 +17,9 @@
 // @version        1.1.3
 // @license        LGPLv3
 
-// @compatible     chrome 完美支持
-// @compatible     firefox 完美支持
-// @compatible     opera 完美支持
+// @compatible     chrome 46.0.2490.86 测试通过
+// @compatible     firefox 42.0 测试通过
+// @compatible     opera 33.0.1990.115 测试通过
 // @compatible     safari 未测试
 
 // @include        http://*
@@ -32,6 +32,7 @@
 
 // 要处理的event
 var eventNames = "contextmenu|select|selectstart|copy|cut|dragstart|mousedown".split("|");
+var eventNames_on = [];
 // 原始 addEventListener 的保存位置
 var addEventListenerName = getRandStr('qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM', parseInt(Math.random() * 12 + 8));
 
@@ -49,10 +50,8 @@ function clearLoop() {
   var elements = getElements();
 
   for(var i in elements) {
-    var element = elements[i];
-
-    for(var j in eventNames) {
-      element['on' + eventNames[j]] = null;
+    for(var j in eventNames_on) {
+      elements[i][eventNames_on[j]] = null;
     }
   }
 }
@@ -66,7 +65,7 @@ function returnTrue() {
 function getRandStr(chs, len) {
   var str = '';
 
-  for(var i = 0; i < len; i++) {
+  while(len--) {
     str += chs[parseInt(Math.random() * chs.length)];
   }
 
@@ -75,39 +74,37 @@ function getRandStr(chs, len) {
 
 // 获取所有元素 包括document
 function getElements() {
-  var elements = document.getElementsByTagName('*');
+  var elements = Array.prototype.slice.call(document.getElementsByTagName('*'));
+  elements.push(document);
 
-  var elements2 = [];
-  for(var i = 0; i < elements.length; i++) {
-    elements2.push(elements[i]);
-  }
-  elements2.push(document);
-
-  return elements2;
+  return elements;
 }
 
 // 添加css
 function addStyle(css) {
-  var head = document.getElementsByTagName('head')[0];
   var style = document.createElement('style');
-  style.type = 'text/css';
   style.innerHTML = css;
-  head.appendChild(style);   
+  document.head.appendChild(style);   
 }
 
 // 初始化
 function init() {
+  // 处理 onxxx 的 event 名称
+  for(var i in eventNames) {
+    eventNames_on[i] = 'on' + eventNames[i];
+  }
+
+  // 调用清理循环
+  setInterval(clearLoop, 15 * 1000);
+  window.addEventListener('load', clearLoop, true);
+  clearLoop();
+
   // hook addEventListener
-  EventTarget.prototype[addEventListenerName] = document.__addEventListener = EventTarget.prototype.addEventListener;
+  document.__addEventListener = EventTarget.prototype[addEventListenerName] = EventTarget.prototype.addEventListener;
   document[addEventListenerName] = document.addEventListener;
 
   EventTarget.prototype.addEventListener = addEventListener;
   document.addEventListener = addEventListener;
-
-  // 调用清理循环
-  setInterval(clearLoop, 10000);
-  window.addEventListener('load', clearLoop, true);
-  clearLoop();
 
   // 添加CSS
   addStyle('html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}');
