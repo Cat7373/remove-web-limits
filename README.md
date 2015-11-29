@@ -5,6 +5,9 @@
 1. [项目主页](https://cat7373.github.io/remove-web-limits/)
 2. [GreasyFork](https://greasyfork.org/scripts/14146)
 
+# 说明：
+* 基本不影响网页正常功能，如果影响了任何功能，可以暂时禁用脚本解决。
+
 # 手动安装步骤:
 1. 安装扩展程序
   * Chrome 浏览器需要安装 [TamperMonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) 扩展程序。
