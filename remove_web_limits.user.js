@@ -14,12 +14,12 @@
 // @updateURL      https://cat7373.github.io/remove-web-limits/remove_web_limits.user.js
 
 // @author         Cat73
-// @version        1.2
+// @version        1.2.1
 // @license        LGPLv3
 
-// @compatible     chrome 46.0.2490.86 + TamperMonkey 测试通过
-// @compatible     firefox 42.0 + GreaseMonkey 测试通过
-// @compatible     opera 33.0.1990.115 + TamperMonkey 测试通过
+// @compatible     chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.2.1 测试通过
+// @compatible     firefox Firefox_42.0 + GreaseMonkey + 脚本_1.2.1 测试通过
+// @compatible     opera Opera_33.0.1990.115 + TamperMonkey + 脚本_1.1.3 测试通过
 // @compatible     safari 未测试
 
 // @match          *://*/*
@@ -33,24 +33,29 @@ var hook_eventNames = "contextmenu|select|selectstart|copy|cut|dragstart".split(
 var unhook_eventNames = "mousedown|keydown".split("|");
 var eventNames = hook_eventNames.concat(unhook_eventNames);
 var eventNames_on = [];
-// 原始 addEventListener 的保存位置
+// 储存名称
 var storageName = getRandStr('qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM', parseInt(Math.random() * 12 + 8));
+// 储存被 Hook 的函数
+var EventTarget_addEventListener = EventTarget.prototype.addEventListener;
+var document_addEventListener = document.addEventListener;
+var Event_preventDefault = Event.prototype.preventDefault;
 
 // Hook addEventListener proc
 function addEventListener(type, func, useCapture) {
+  var _addEventListener = this === document ? document_addEventListener : EventTarget_addEventListener;
   if(hook_eventNames.indexOf(type) >= 0) {
-    this[storageName](type, returnTrue, useCapture);
+    _addEventListener.apply(this, [type, returnTrue, useCapture]);
   } else if(unhook_eventNames.indexOf(type) >= 0) {
     var funcsName = storageName + type + (useCapture ? 't' : 'f');
 
     if(this[funcsName] === undefined) {
       this[funcsName] = [];
-      this[storageName](type, useCapture ? unhook_t : unhook_f, useCapture);
+      _addEventListener.apply(this, [type, useCapture ? unhook_t : unhook_f, useCapture]);
     }
 
     this[funcsName].push(func)
   } else {
-    this[storageName](type, func, useCapture);
+    _addEventListener.apply(this, arguments);
   }
 }
 
@@ -80,6 +85,7 @@ function unhook(e, self, funcsName) {
   for(var i in list) {
     list[i](e);
   }
+
   e.returnValue = true;
   return true;
 }
@@ -107,7 +113,7 @@ function getElements() {
 function addStyle(css) {
   var style = document.createElement('style');
   style.innerHTML = css;
-  document.head.appendChild(style);   
+  document.head.appendChild(style);
 }
 
 // 初始化
@@ -124,17 +130,13 @@ function init() {
   clearLoop();
 
   // hook addEventListener
-  document.__addEventListener = EventTarget.prototype[storageName] = EventTarget.prototype.addEventListener;
-  document[storageName] = document.addEventListener;
-
   EventTarget.prototype.addEventListener = addEventListener;
   document.addEventListener = addEventListener;
 
   // hook preventDefault
-  Event.prototype[storageName] = Event.prototype.preventDefault;
   Event.prototype.preventDefault = function() {
     if(eventNames.indexOf(this.type) < 0) {
-      this[storageName]();
+      Event_preventDefault.apply(this, arguments);
     }
   };
 
