@@ -14,7 +14,7 @@
 // @updateURL      https://cat7373.github.io/remove-web-limits/remove_web_limits.user.js
 
 // @author         Cat73
-// @version        1.1.3
+// @version        1.2
 // @license        LGPLv3
 
 // @compatible     chrome 46.0.2490.86 + TamperMonkey 测试通过
@@ -29,18 +29,29 @@
 
 
 // 要处理的event
-var eventNames = "contextmenu|select|selectstart|copy|cut|dragstart|mousedown".split("|");
+var hook_eventNames = "contextmenu|select|selectstart|copy|cut|dragstart".split("|");
+var unhook_eventNames = "mousedown|keydown".split("|");
+var eventNames = hook_eventNames.concat(unhook_eventNames);
 var eventNames_on = [];
 // 原始 addEventListener 的保存位置
-var addEventListenerName = getRandStr('qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM', parseInt(Math.random() * 12 + 8));
+var storageName = getRandStr('qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM', parseInt(Math.random() * 12 + 8));
 
 // Hook addEventListener proc
-function addEventListener(event, func, useCapture) {
-  if(eventNames.indexOf(event) >= 0) {
-    func = returnTrue;
-  }
+function addEventListener(type, func, useCapture) {
+  if(hook_eventNames.indexOf(type) >= 0) {
+    this[storageName](type, returnTrue, useCapture);
+  } else if(unhook_eventNames.indexOf(type) >= 0) {
+    var funcsName = storageName + type + (useCapture ? 't' : 'f');
 
-  this[addEventListenerName](event, func, useCapture);
+    if(this[funcsName] === undefined) {
+      this[funcsName] = [];
+      this[storageName](type, useCapture ? unhook_t : unhook_f, useCapture);
+    }
+
+    this[funcsName].push(func)
+  } else {
+    this[storageName](type, func, useCapture);
+  }
 }
 
 // 清理循环
@@ -55,7 +66,21 @@ function clearLoop() {
 }
 
 // 返回true的函数
-function returnTrue() {
+function returnTrue(e) {
+  return true;
+}
+function unhook_t(e) {
+  return unhook(e, this, storageName + e.type + 't');
+}
+function unhook_f(e) {
+  return unhook(e, this, storageName + e.type + 'f');
+}
+function unhook(e, self, funcsName) {
+  var list = self[funcsName];
+  for(var i in list) {
+    list[i](e);
+  }
+  e.returnValue = true;
   return true;
 }
 
@@ -93,22 +118,30 @@ function init() {
   }
 
   // 调用清理循环
-  setInterval(clearLoop, 15 * 1000);
+  setInterval(clearLoop, 30 * 1000);
+  setTimeout(clearLoop, 2500);
   window.addEventListener('load', clearLoop, true);
   clearLoop();
 
   // hook addEventListener
-  document.__addEventListener = EventTarget.prototype[addEventListenerName] = EventTarget.prototype.addEventListener;
-  document[addEventListenerName] = document.addEventListener;
+  document.__addEventListener = EventTarget.prototype[storageName] = EventTarget.prototype.addEventListener;
+  document[storageName] = document.addEventListener;
 
   EventTarget.prototype.addEventListener = addEventListener;
   document.addEventListener = addEventListener;
 
+  // hook preventDefault
+  Event.prototype[storageName] = Event.prototype.preventDefault;
+  Event.prototype.preventDefault = function() {
+    if(eventNames.indexOf(this.type) < 0) {
+      this[storageName]();
+    }
+  };
+
+  console.debug('storageName：' + storageName);
+
   // 添加CSS
   addStyle('html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}');
-
-  // 输出原始 addEventListener 位置
-  console.debug('原始 addEventListener 名称：' + addEventListenerName);
 }
 
 init();
