@@ -80,6 +80,7 @@ function unhook(e, self, funcsName) {
   for(var i in list) {
     list[i](e);
   }
+
   e.returnValue = true;
   return true;
 }
@@ -107,7 +108,7 @@ function getElements() {
 function addStyle(css) {
   var style = document.createElement('style');
   style.innerHTML = css;
-  document.head.appendChild(style);   
+  document.head.appendChild(style);
 }
 
 // 初始化
