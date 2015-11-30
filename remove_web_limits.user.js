@@ -20,10 +20,10 @@
 // @updateURL         https://cat7373.github.io/remove-web-limits/remove_web_limits.user.js
 
 // @author            Cat73
-// @version           1.2.2
+// @version           1.2.3
 // @license           LGPLv3
 
-// @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.2.2 测试通过
+// @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.2.3 测试通过
 // @compatible        firefox Firefox_42.0 + GreaseMonkey + 脚本_1.2.1 测试通过
 // @compatible        opera Opera_33.0.1990.115 + TamperMonkey + 脚本_1.1.3 测试通过
 // @compatible        safari 未测试
@@ -38,7 +38,6 @@
 var hook_eventNames = "contextmenu|select|selectstart|copy|cut|dragstart".split("|");
 var unhook_eventNames = "mousedown|mouseup|keydown|keyup".split("|");
 var eventNames = hook_eventNames.concat(unhook_eventNames);
-var eventNames_on = [];
 // 储存名称
 var storageName = getRandStr('qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM', parseInt(Math.random() * 12 + 8));
 // 储存被 Hook 的函数
@@ -70,8 +69,16 @@ function clearLoop() {
   var elements = getElements();
 
   for(var i in elements) {
-    for(var j in eventNames_on) {
-      elements[i][eventNames_on[j]] = null;
+    for(var j in eventNames) {
+      var name = 'on' + eventNames[j];
+      if(elements[i][name] != null && elements[i][name] != onxxx) {
+        if(unhook_eventNames.indexOf(eventNames[j]) >= 0) {
+          elements[i][storageName + name] = elements[i][name];
+          elements[i][name] = onxxx;
+        } else {
+          elements[i][name] = null;
+        }
+      }
     }
   }
 }
@@ -91,6 +98,13 @@ function unhook(e, self, funcsName) {
   for(var i in list) {
     list[i](e);
   }
+
+  e.returnValue = true;
+  return true;
+}
+function onxxx(e) {
+  var name = storageName + 'on' + e.type;
+  this[name](e);
 
   e.returnValue = true;
   return true;
@@ -124,11 +138,6 @@ function addStyle(css) {
 
 // 初始化
 function init() {
-  // 处理 onxxx 的 event 名称
-  for(var i in eventNames) {
-    eventNames_on[i] = 'on' + eventNames[i];
-  }
-
   // 调用清理循环
   setInterval(clearLoop, 30 * 1000);
   setTimeout(clearLoop, 2500);
