@@ -20,10 +20,10 @@
 // @updateURL         https://cat7373.github.io/remove-web-limits/remove_web_limits.user.js
 
 // @author            Cat73
-// @version           1.2.3
+// @version           1.2.4
 // @license           LGPLv3
 
-// @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.2.3 测试通过
+// @compatible        chrome Chrome_46.0.2490.86 + TamperMonkey + 脚本_1.2.4 测试通过
 // @compatible        firefox Firefox_42.0 + GreaseMonkey + 脚本_1.2.1 测试通过
 // @compatible        opera Opera_33.0.1990.115 + TamperMonkey + 脚本_1.1.3 测试通过
 // @compatible        safari 未测试
@@ -154,6 +154,14 @@ function init() {
       Event_preventDefault.apply(this, arguments);
     }
   };
+  
+  // Hook set returnValue
+  Event.prototype.__defineSetter__('returnValue', function() {
+    if(this.returnValue != true && eventNames.indexOf(this.type) >= 0) {
+      console.log(this);
+      this.returnValue = true;
+    }
+  });
 
   console.debug('storageName：' + storageName);
 
