@@ -32,7 +32,7 @@
 // @grant             none
 // @run-at            document-start
 // ==/UserScript==
-
+'use strict';
 
 // 域名规则列表
 var rules = {
