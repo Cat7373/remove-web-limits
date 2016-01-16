@@ -64,9 +64,7 @@ var lists = {
 }
 
 // 要处理的 event 列表
-var hook_eventNames = undefined;
-var unhook_eventNames = undefined;
-var eventNames = undefined;
+var hook_eventNames, unhook_eventNames, eventNames;
 // 储存名称
 var storageName = getRandStr('qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM', parseInt(Math.random() * 12 + 8));
 // 储存被 Hook 的函数
