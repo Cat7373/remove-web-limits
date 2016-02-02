@@ -39,7 +39,7 @@ var rules = {
   black_rule: {
     name: "black",
     hook_eventNames: "",
-    unhook_eventNames: "",
+    unhook_eventNames: ""
   },
   default_rule: {
     name: "default",
@@ -51,7 +51,7 @@ var rules = {
     hook_set_returnValue: true,
     add_css: true
   }
-}
+};
 // 域名列表
 var lists = {
   // 黑名单
@@ -61,7 +61,7 @@ var lists = {
     /mail\.qq\.com.*/,
     /translate\.google\..*/
   ]
-}
+};
 
 // 要处理的 event 列表
 var hook_eventNames, unhook_eventNames, eventNames;
@@ -216,12 +216,11 @@ function init() {
       }
     };
   }
-  
+
   // Hook set returnValue
   if(rule.hook_set_returnValue) {
     Event.prototype.__defineSetter__('returnValue', function() {
       if(this.returnValue != true && eventNames.indexOf(this.type) >= 0) {
-        console.log(this);
         this.returnValue = true;
       }
     });
