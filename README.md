@@ -2,7 +2,7 @@
 通杀大部分网站，可以解除禁止复制、剪切、选择文本、右键菜单的限制。
 
 # 暂停维护
-本人上班比较忙没时间维护，遇到 bug 之类的可以考虑更换这个脚本：https://greasyfork.org/zh-CN/scripts/28497
+本人上班比较忙没时间维护，遇到 bug 之类的可以考虑更换这个脚本：https://greasyfork.org/scripts/28497
 
 # 脚本安装地址:
 1. [项目主页](https://cat7373.github.io/remove-web-limits/)
