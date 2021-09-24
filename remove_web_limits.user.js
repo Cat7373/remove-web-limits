@@ -78,7 +78,7 @@
     var _addEventListener = this === document ? document_addEventListener : EventTarget_addEventListener;
     if(hook_eventNames.indexOf(type) >= 0) {
       _addEventListener.apply(this, [type, returnTrue, useCapture]);
-    } else if(unhook_eventNames.indexOf(type) >= 0) {
+    } else if(this && unhook_eventNames.indexOf(type) >= 0) {
       var funcsName = storageName + type + (useCapture ? 't' : 'f');
 
       if(this[funcsName] === undefined) {
