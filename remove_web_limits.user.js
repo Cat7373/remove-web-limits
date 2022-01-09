@@ -231,7 +231,7 @@
 
     // 添加CSS
     if(rule.add_css) {
-      addStyle('html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}');
+      addStyle('html, * {-webkit-user-select:text!important; -moz-user-select:text!important; user-select:text!important; -ms-user-select:text!important; -khtml-user-select:text!important;}');
     }
   }
 
